@@ -8,7 +8,7 @@
 
 [![MISRA](https://img.shields.io/badge/misra-compliant-brightgreen.svg)](/misra/README.md) [![API](https://img.shields.io/badge/api-reference-blue.svg)](https://www.libdriver.com/docs/sht30/index.html) [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](/LICENSE)
 
-SHT30建立在全新和優化的CMOSens芯片之上，進一步提高了產品可靠性和精度規格。 SHT30提供了一系列新功能，如增強信號處理、兩個獨特和用戶可選IIC地址、一個可編程溫濕度極限的報警模式，以及高達1 MHz的通信速度。 DFN封裝的佔位面積為2.5 × 2.5 mm2，高度為0.9 mm。這有助於SHT30集成到多種應用。此外，2.15至5.5 V的寬電源電壓範圍和多種可選接口可保證與不同集成要求的兼容性。總之，SHT30濕度傳感器系列融入了Sensirion作為行業領導者15年的經驗和心血，是一款超高性價比的產品。
+SHT30建立在全新和優化的CMOSens芯片之上，進一步提高了產品可靠性和精度規格。 SHT30提供了一系列新功能，如增強信號處理、兩個獨特和用戶可選IIC地址、一個可編程溫濕度極限的報警模式，以及高達1 MHz的通信速度。 DFN封裝的面積為2.5 × 2.5 mm2，高度為0.9 mm。這有助於SHT30集成到多種應用。此外，2.15至5.5 V的寬電源電壓範圍和多種可選接口可保證與不同集成要求的兼容性。總之，SHT30濕度傳感器系列融入了Sensirion作為行業領導者15年的經驗和心血，是一款超高性價比的產品。
 
 LibDriver SHT30是LibDriver推出的SHT30的全功能驅動，該驅動提供溫濕度連續模式讀取和溫濕度單次模式讀取等功能並且它符合MISRA標準。
 
