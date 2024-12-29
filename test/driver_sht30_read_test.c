@@ -41,8 +41,8 @@ static sht30_handle_t gs_handle;        /**< sht30 handle */
 
 /**
  * @brief     read test
- * @param[in] addr_pin is the iic device address
- * @param[in] times is test times
+ * @param[in] addr_pin iic device address
+ * @param[in] times test times
  * @return    status code
  *            - 0 success
  *            - 1 test failed

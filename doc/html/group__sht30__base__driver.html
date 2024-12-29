@@ -403,7 +403,7 @@ Functions</h2></td></tr>
 <p>clear the current status </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an sht30 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>pointer to an sht30 handle structure </td></tr>
   </table>
   </dd>
 </dl>
@@ -466,11 +466,11 @@ Functions</h2></td></tr>
 <p>read data continuously </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an sht30 handle structure </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">*temperature_raw</td><td>points to a raw temperature buffer </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">*temperature_s</td><td>points to a converted temperature buffer </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">*humidity_raw</td><td>points to a raw humidity buffer </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">*humidity_s</td><td>points to a converted humidity buffer </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>pointer to an sht30 handle structure </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">*temperature_raw</td><td>pointer to a raw temperature buffer </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">*temperature_s</td><td>pointer to a converted temperature buffer </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">*humidity_raw</td><td>pointer to a raw humidity buffer </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">*humidity_s</td><td>pointer to a converted humidity buffer </td></tr>
   </table>
   </dd>
 </dl>
@@ -506,7 +506,7 @@ Functions</h2></td></tr>
 <p>close the chip </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an sht30 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>pointer to an sht30 handle structure </td></tr>
   </table>
   </dd>
 </dl>
@@ -552,8 +552,8 @@ Functions</h2></td></tr>
 <p>get the iic address pin </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an sht30 handle structure </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">*addr_pin</td><td>points to a chip iic address pin buffer </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>pointer to an sht30 handle structure </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">*addr_pin</td><td>pointer to a chip iic address pin buffer </td></tr>
   </table>
   </dd>
 </dl>
@@ -598,8 +598,8 @@ Functions</h2></td></tr>
 <p>get the measurement repeatability </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an sht30 handle structure </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">*repeatability</td><td>points to a measurement repeatability buffer </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>pointer to an sht30 handle structure </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">*repeatability</td><td>pointer to a measurement repeatability buffer </td></tr>
   </table>
   </dd>
 </dl>
@@ -644,8 +644,8 @@ Functions</h2></td></tr>
 <p>get the current status </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an sht30 handle structure </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">*status</td><td>points to a status buffer </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>pointer to an sht30 handle structure </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">*status</td><td>pointer to a status buffer </td></tr>
   </table>
   </dd>
 </dl>
@@ -680,7 +680,7 @@ Functions</h2></td></tr>
 <p>get chip's information </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[out]</td><td class="paramname">*info</td><td>points to an sht30 info structure </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">*info</td><td>pointer to an sht30 info structure </td></tr>
   </table>
   </dd>
 </dl>
@@ -714,7 +714,7 @@ Functions</h2></td></tr>
 <p>initialize the chip </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an sht30 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>pointer to an sht30 handle structure </td></tr>
   </table>
   </dd>
 </dl>
@@ -760,8 +760,8 @@ Functions</h2></td></tr>
 <p>set the iic address pin </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an sht30 handle structure </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">addr_pin</td><td>is the chip iic address pin </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>pointer to an sht30 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">addr_pin</td><td>chip iic address pin </td></tr>
   </table>
   </dd>
 </dl>
@@ -796,7 +796,7 @@ Functions</h2></td></tr>
 <p>set the chip art </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an sht30 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>pointer to an sht30 handle structure </td></tr>
   </table>
   </dd>
 </dl>
@@ -842,8 +842,8 @@ Functions</h2></td></tr>
 <p>enable or disable the chip heater </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an sht30 handle structure </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">enable</td><td>is a bool value </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>pointer to an sht30 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">enable</td><td>bool value </td></tr>
   </table>
   </dd>
 </dl>
@@ -889,8 +889,8 @@ Functions</h2></td></tr>
 <p>set the measurement repeatability </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an sht30 handle structure </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">repeatability</td><td>is the measurement repeatability </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>pointer to an sht30 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">repeatability</td><td>measurement repeatability </td></tr>
   </table>
   </dd>
 </dl>
@@ -959,12 +959,12 @@ Functions</h2></td></tr>
 <p>read data once </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an sht30 handle structure </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">clock_stretching_enable</td><td>is a clock stretching bool value </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">*temperature_raw</td><td>points to a raw temperature buffer </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">*temperature_s</td><td>points to a converted temperature buffer </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">*humidity_raw</td><td>points to a raw humidity buffer </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">*humidity_s</td><td>points to a converted humidity buffer </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>pointer to an sht30 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">clock_stretching_enable</td><td>clock stretching bool value </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">*temperature_raw</td><td>pointer to a raw temperature buffer </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">*temperature_s</td><td>pointer to a converted temperature buffer </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">*humidity_raw</td><td>pointer to a raw humidity buffer </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">*humidity_s</td><td>pointer to a converted humidity buffer </td></tr>
   </table>
   </dd>
 </dl>
@@ -1000,7 +1000,7 @@ Functions</h2></td></tr>
 <p>soft reset the chip </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an sht30 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>pointer to an sht30 handle structure </td></tr>
   </table>
   </dd>
 </dl>
@@ -1046,8 +1046,8 @@ Functions</h2></td></tr>
 <p>start reading </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an sht30 handle structure </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">rate</td><td>is the sample rate </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>pointer to an sht30 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">rate</td><td>sample rate </td></tr>
   </table>
   </dd>
 </dl>
@@ -1083,7 +1083,7 @@ Functions</h2></td></tr>
 <p>stop reading </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>points to an sht30 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>pointer to an sht30 handle structure </td></tr>
   </table>
   </dd>
 </dl>

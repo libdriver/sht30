@@ -63,8 +63,8 @@
 
 /**
  * @brief     write the command
- * @param[in] *handle points to an sht30 handle structure
- * @param[in] cmd is the write command
+ * @param[in] *handle pointer to an sht30 handle structure
+ * @param[in] cmd written command
  * @return    status code
  *            - 0 success
  *            - 1 write failed
@@ -84,10 +84,10 @@ static uint8_t a_sht30_write(sht30_handle_t *handle, uint16_t cmd)
 
 /**
  * @brief      read bytes
- * @param[in]  *handle points to an sht30 handle structure
- * @param[in]  reg is the iic register address
- * @param[out] *data points to a data buffer
- * @param[in]  len is the data length
+ * @param[in]  *handle pointer to an sht30 handle structure
+ * @param[in]  reg iic register address
+ * @param[out] *data pointer to a data buffer
+ * @param[in]  len data length
  * @return     status code
  *             - 0 success
  *             - 1 read failed
@@ -107,8 +107,8 @@ static uint8_t a_sht30_read(sht30_handle_t *handle, uint16_t reg, uint8_t *data,
 
 /**
  * @brief     calculate the crc
- * @param[in] *data points to a data buffer
- * @param[in] len is the data length
+ * @param[in] *data pointer to a data buffer
+ * @param[in] len data length
  * @return    crc
  * @note      none
  */
@@ -132,7 +132,7 @@ static uint8_t a_sht30_crc(uint8_t *data, uint16_t len)
 
 /**
  * @brief     initialize the chip
- * @param[in] *handle points to an sht30 handle structure
+ * @param[in] *handle pointer to an sht30 handle structure
  * @return    status code
  *            - 0 success
  *            - 1 iic initialization failed
@@ -206,7 +206,7 @@ uint8_t sht30_init(sht30_handle_t *handle)
 
 /**
  * @brief     close the chip
- * @param[in] *handle points to an sht30 handle structure
+ * @param[in] *handle pointer to an sht30 handle structure
  * @return    status code
  *            - 0 success
  *            - 1 iic deinit failed
@@ -249,8 +249,8 @@ uint8_t sht30_deinit(sht30_handle_t *handle)
 
 /**
  * @brief     set the iic address pin
- * @param[in] *handle points to an sht30 handle structure
- * @param[in] addr_pin is the chip iic address pin
+ * @param[in] *handle pointer to an sht30 handle structure
+ * @param[in] addr_pin chip iic address pin
  * @return    status code
  *            - 0 success
  *            - 1 set addr pin failed
@@ -271,8 +271,8 @@ uint8_t sht30_set_addr_pin(sht30_handle_t *handle, sht30_address_t addr_pin)
 
 /**
  * @brief      get the iic address pin
- * @param[in]  *handle points to an sht30 handle structure
- * @param[out] *addr_pin points to a chip iic address pin buffer
+ * @param[in]  *handle pointer to an sht30 handle structure
+ * @param[out] *addr_pin pointer to a chip iic address pin buffer
  * @return      status code
  *              - 0 success
  *              - 1 get addr pin failed
@@ -293,8 +293,8 @@ uint8_t sht30_get_addr_pin(sht30_handle_t *handle, sht30_address_t *addr_pin)
 
 /**
  * @brief      get the current status
- * @param[in]  *handle points to an sht30 handle structure
- * @param[out] *status points to a status buffer
+ * @param[in]  *handle pointer to an sht30 handle structure
+ * @param[out] *status pointer to a status buffer
  * @return      status code
  *              - 0 success
  *              - 1 get status failed
@@ -341,7 +341,7 @@ uint8_t sht30_get_status(sht30_handle_t *handle, uint16_t *status)
 
 /**
  * @brief     clear the current status
- * @param[in] *handle points to an sht30 handle structure
+ * @param[in] *handle pointer to an sht30 handle structure
  * @return    status code
  *            - 0 success
  *            - 1 clear status failed
@@ -376,8 +376,8 @@ uint8_t sht30_clear_status(sht30_handle_t *handle)
 
 /**
  * @brief     set the measurement repeatability
- * @param[in] *handle points to an sht30 handle structure
- * @param[in] repeatability is the measurement repeatability
+ * @param[in] *handle pointer to an sht30 handle structure
+ * @param[in] repeatability measurement repeatability
  * @return    status code
  *            - 0 success
  *            - 1 set repeatability failed
@@ -402,8 +402,8 @@ uint8_t sht30_set_repeatability(sht30_handle_t *handle, sht30_repeatability_t re
 
 /**
  * @brief      get the measurement repeatability
- * @param[in]  *handle points to an sht30 handle structure
- * @param[out] *repeatability points to a measurement repeatability buffer
+ * @param[in]  *handle pointer to an sht30 handle structure
+ * @param[out] *repeatability pointer to a measurement repeatability buffer
  * @return     status code
  *             - 0 success
  *             - 1 get repeatability failed
@@ -428,12 +428,12 @@ uint8_t sht30_get_repeatability(sht30_handle_t *handle, sht30_repeatability_t *r
 
 /**
  * @brief      read data once
- * @param[in]  *handle points to an sht30 handle structure
- * @param[in]  clock_stretching_enable is a clock stretching bool value
- * @param[out] *temperature_raw points to a raw temperature buffer
- * @param[out] *temperature_s points to a converted temperature buffer
- * @param[out] *humidity_raw points to a raw humidity buffer
- * @param[out] *humidity_s points to a converted humidity buffer
+ * @param[in]  *handle pointer to an sht30 handle structure
+ * @param[in]  clock_stretching_enable clock stretching bool value
+ * @param[out] *temperature_raw pointer to a raw temperature buffer
+ * @param[out] *temperature_s pointer to a converted temperature buffer
+ * @param[out] *humidity_raw pointer to a raw humidity buffer
+ * @param[out] *humidity_s pointer to a converted humidity buffer
  * @return     status code
  *             - 0 success
  *             - 1 single read failed
@@ -546,8 +546,8 @@ uint8_t sht30_single_read(sht30_handle_t *handle, sht30_bool_t clock_stretching_
 
 /**
  * @brief     start reading
- * @param[in] *handle points to an sht30 handle structure
- * @param[in] rate is the sample rate
+ * @param[in] *handle pointer to an sht30 handle structure
+ * @param[in] rate sample rate
  * @return    status code
  *            - 0 success
  *            - 1 start continuous read failed
@@ -675,7 +675,7 @@ uint8_t sht30_start_continuous_read(sht30_handle_t *handle, sht30_rate_t rate)
 
 /**
  * @brief     stop reading
- * @param[in] *handle points to an sht30 handle structure
+ * @param[in] *handle pointer to an sht30 handle structure
  * @return    status code
  *            - 0 success
  *            - 1 stop continuous read failed
@@ -711,11 +711,11 @@ uint8_t sht30_stop_continuous_read(sht30_handle_t *handle)
 
 /**
  * @brief      read data continuously
- * @param[in]  *handle points to an sht30 handle structure
- * @param[out] *temperature_raw points to a raw temperature buffer
- * @param[out] *temperature_s points to a converted temperature buffer
- * @param[out] *humidity_raw points to a raw humidity buffer
- * @param[out] *humidity_s points to a converted humidity buffer
+ * @param[in]  *handle pointer to an sht30 handle structure
+ * @param[out] *temperature_raw pointer to a raw temperature buffer
+ * @param[out] *temperature_s pointer to a converted temperature buffer
+ * @param[out] *humidity_raw pointer to a raw humidity buffer
+ * @param[out] *humidity_s pointer to a converted humidity buffer
  * @return     status code
  *             - 0 success
  *             - 1 continuous read failed
@@ -770,7 +770,7 @@ uint8_t sht30_continuous_read(sht30_handle_t *handle,
 
 /**
  * @brief     set the chip art
- * @param[in] *handle points to an sht30 handle structure
+ * @param[in] *handle pointer to an sht30 handle structure
  * @return    status code
  *            - 0 success
  *            - 1 set art failed
@@ -806,7 +806,7 @@ uint8_t sht30_set_art(sht30_handle_t *handle)
 
 /**
  * @brief     soft reset the chip
- * @param[in] *handle points to an sht30 handle structure
+ * @param[in] *handle pointer to an sht30 handle structure
  * @return    status code
  *            - 0 success
  *            - 1 soft reset failed
@@ -842,8 +842,8 @@ uint8_t sht30_soft_reset(sht30_handle_t *handle)
 
 /**
  * @brief     enable or disable the chip heater
- * @param[in] *handle points to an sht30 handle structure
- * @param[in] enable is a bool value
+ * @param[in] *handle pointer to an sht30 handle structure
+ * @param[in] enable bool value
  * @return    status code
  *            - 0 success
  *            - 1 set heater failed
@@ -892,8 +892,8 @@ uint8_t sht30_set_heater(sht30_handle_t *handle, sht30_bool_t enable)
 
 /**
  * @brief     set the chip register
- * @param[in] *handle points to an sht30 handle structure
- * @param[in] command is the chip command
+ * @param[in] *handle pointer to an sht30 handle structure
+ * @param[in] command chip command
  * @return    status code
  *            - 0 success
  *            - 1 write failed
@@ -917,10 +917,10 @@ uint8_t sht30_set_reg(sht30_handle_t *handle, uint16_t command)
 
 /**
  * @brief      get the chip register
- * @param[in]  *handle points to an sht30 handle structure
- * @param[in]  command is the chip command
- * @param[out] *buf points to data buffer
- * @param[in]  len is the data length
+ * @param[in]  *handle pointer to an sht30 handle structure
+ * @param[in]  command chip command
+ * @param[out] *buf pointer to data buffer
+ * @param[in]  len data length
  * @return     status code
  *             - 0 success
  *             - 1 read failed
@@ -944,7 +944,7 @@ uint8_t sht30_get_reg(sht30_handle_t *handle, uint16_t command, uint8_t *buf, ui
 
 /**
  * @brief      get chip's information
- * @param[out] *info points to an sht30 info structure
+ * @param[out] *info pointer to an sht30 info structure
  * @return     status code
  *             - 0 success
  *             - 2 handle is NULL
