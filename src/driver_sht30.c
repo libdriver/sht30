@@ -52,14 +52,23 @@
 /**
  * @brief chip command definition
  */
-#define SHT30_COMMAND_FETCH_DATA            0xE000U        /**< fetch data command */
-#define SHT30_COMMAND_ART                   0x2B32U        /**< art command */
-#define SHT30_COMMAND_BREAK                 0x3093U        /**< break command */
-#define SHT30_COMMAND_SOFT_RESET            0x30A2U        /**< soft reset command */
-#define SHT30_COMMAND_HEATER_ENABLE         0x306DU        /**< heater enable command */
-#define SHT30_COMMAND_HEATER_DISABLE        0x3066U        /**< heater disable command */
-#define SHT30_COMMAND_READ_STATUS           0xF32DU        /**< read status command */
-#define SHT30_COMMAND_CLEAR_STATUS          0x3041U        /**< clear status command */
+#define SHT30_COMMAND_FETCH_DATA                      0xE000U        /**< fetch data command */
+#define SHT30_COMMAND_ART                             0x2B32U        /**< art command */
+#define SHT30_COMMAND_BREAK                           0x3093U        /**< break command */
+#define SHT30_COMMAND_SOFT_RESET                      0x30A2U        /**< soft reset command */
+#define SHT30_COMMAND_HEATER_ENABLE                   0x306DU        /**< heater enable command */
+#define SHT30_COMMAND_HEATER_DISABLE                  0x3066U        /**< heater disable command */
+#define SHT30_COMMAND_READ_STATUS                     0xF32DU        /**< read status command */
+#define SHT30_COMMAND_CLEAR_STATUS                    0x3041U        /**< clear status command */
+#define SHT30_COMMAND_GET_SERIAL_NUMBER               0x3682U        /**< get serial number command */
+#define SHT30_COMMAND_READ_HIGH_ALERT_LIMIT_SET       0xE11FU        /**< read high alert limit set command */
+#define SHT30_COMMAND_READ_HIGH_ALERT_LIMIT_CLEAR     0xE114U        /**< read high alert limit clear command */
+#define SHT30_COMMAND_READ_LOW_ALERT_LIMIT_SET        0xE102U        /**< read low alert limit set command */
+#define SHT30_COMMAND_READ_LOW_ALERT_LIMIT_CLEAR      0xE109U        /**< read low alert limit clear command */
+#define SHT30_COMMAND_WRITE_HIGH_ALERT_LIMIT_SET      0x611DU        /**< write high alert limit set command */
+#define SHT30_COMMAND_WRITE_HIGH_ALERT_LIMIT_CLEAR    0x6116U        /**< write high alert limit clear command */
+#define SHT30_COMMAND_WRITE_LOW_ALERT_LIMIT_SET       0x6100U        /**< write low alert limit set command */
+#define SHT30_COMMAND_WRITE_LOW_ALERT_LIMIT_CLEAR     0x610BU        /**< write low alert limit clear command */
 
 /**
  * @brief     write the command
@@ -79,6 +88,29 @@ static uint8_t a_sht30_write(sht30_handle_t *handle, uint16_t cmd)
     else
     {
         return 0;                                                                /* success return 0 */
+    }
+}
+
+/**
+ * @brief     write bytes
+ * @param[in] *handle pointer to an sht30 handle structure
+ * @param[in] reg iic register address
+ * @param[in] *data pointer to a data buffer
+ * @param[in] len data length
+ * @return    status code
+ *            - 0 success
+ *            - 1 write failed
+ * @note      none
+ */
+static uint8_t a_sht30_write_bytes(sht30_handle_t *handle, uint16_t reg, uint8_t *data, uint16_t len)
+{
+    if (handle->iic_write_address16(handle->iic_addr, reg, data, len) != 0)        /* iic write */
+    {
+        return 1;                                                                  /* return error */
+    }
+    else
+    {                                                                              /* success return 0 */
+        return 0;
     }
 }
 
@@ -295,11 +327,12 @@ uint8_t sht30_get_addr_pin(sht30_handle_t *handle, sht30_address_t *addr_pin)
  * @brief      get the current status
  * @param[in]  *handle pointer to an sht30 handle structure
  * @param[out] *status pointer to a status buffer
- * @return      status code
- *              - 0 success
- *              - 1 get status failed
- *              - 2 handle is NULL
- * @note        none
+ * @return     status code
+ *             - 0 success
+ *             - 1 get status failed
+ *             - 2 handle is NULL
+ *             - 3 handle is not initialized
+ * @note       none
  */
 uint8_t sht30_get_status(sht30_handle_t *handle, uint16_t *status) 
 {
@@ -346,6 +379,7 @@ uint8_t sht30_get_status(sht30_handle_t *handle, uint16_t *status)
  *            - 0 success
  *            - 1 clear status failed
  *            - 2 handle is NULL
+ *            - 3 handle is not initialized
  * @note      none
  */
 uint8_t sht30_clear_status(sht30_handle_t *handle)
@@ -888,6 +922,406 @@ uint8_t sht30_set_heater(sht30_handle_t *handle, sht30_bool_t enable)
     }
     
     return 0;                                                         /* success return 0 */
+}
+
+/**
+ * @brief      get serial number
+ * @param[in]  *handle pointer to an sht30 handle structure
+ * @param[out] *sn pointer to a serial number buffer
+ * @return     status code
+ *             - 0 success
+ *             - 1 get serial number failed
+ *             - 2 handle is NULL
+ *             - 3 handle is not initialized
+ * @note       none
+ */
+uint8_t sht30_get_serial_number(sht30_handle_t *handle, uint8_t sn[4])
+{
+    uint8_t res;
+    uint16_t command;
+    uint8_t data[6];
+    
+    if (handle == NULL)                                             /* check handle */
+    {
+        return 2;                                                   /* return error */
+    }
+    if (handle->inited != 1)                                        /* check handle initialization */
+    {
+        return 3;                                                   /* return error */
+    }
+    
+    command = SHT30_COMMAND_GET_SERIAL_NUMBER;                      /* get serial number command */
+    res = a_sht30_read(handle, command, (uint8_t *)data, 6);        /* read data */
+    if (res != 0)                                                   /* check result */
+    {
+        handle->debug_print("sht30: read data failed.\n");          /* read data failed */
+       
+        return 1;                                                   /* return error */
+    }
+    if (a_sht30_crc((uint8_t *)data, 2) != data[2])                 /* check crc */
+    {
+        handle->debug_print("sht30: crc check failed.\n");          /* crc check failed */
+       
+        return 1;                                                   /* return error */
+    }
+    if (a_sht30_crc((uint8_t *)&data[3], 2) != data[5])             /* check crc */
+    {
+        handle->debug_print("sht30: crc check failed.\n");          /* crc check failed */
+       
+        return 1;                                                   /* return error */
+    }
+    sn[0] = data[4];                                                /* set sn0 */
+    sn[1] = data[3];                                                /* set sn1 */
+    sn[2] = data[1];                                                /* set sn2 */
+    sn[3] = data[0];                                                /* set sn3 */
+    
+    return 0;                                                       /* success return 0 */
+}
+
+/**
+ * @brief     set high alert limit
+ * @param[in] *handle pointer to an sht30 handle structure
+ * @param[in] set high alert limit set
+ * @param[in] clear high alert limit clear
+ * @return    status code
+ *            - 0 success
+ *            - 1 set high alert limit failed
+ *            - 2 handle is NULL
+ *            - 3 handle is not initialized
+ * @note      none
+ */
+uint8_t sht30_set_high_alert_limit(sht30_handle_t *handle, uint16_t set, uint16_t clear)
+{
+    uint8_t res;
+    uint16_t command;
+    uint8_t data[3];
+    
+    if (handle == NULL)                                                   /* check handle */
+    {
+        return 2;                                                         /* return error */
+    }
+    if (handle->inited != 1)                                              /* check handle initialization */
+    {
+        return 3;                                                         /* return error */
+    }
+    
+    command = SHT30_COMMAND_WRITE_HIGH_ALERT_LIMIT_SET;                   /* write high alert limit set command */
+    data[0] = (set >> 8) & 0xFF;                                          /* set data 0 */
+    data[1] = (set >> 0) & 0xFF;                                          /* set data 1 */
+    data[2] = a_sht30_crc((uint8_t *)data, 2);                            /* set data crc */
+    res = a_sht30_write_bytes(handle, command, (uint8_t *)data, 3);       /* write data */
+    if (res != 0)                                                         /* check result */
+    {
+        handle->debug_print("sht30: write failed.\n");                    /* write failed */
+       
+        return 1;                                                         /* return error */
+    }
+    handle->delay_ms(10);                                                 /* delay 10ms */
+    command = SHT30_COMMAND_WRITE_HIGH_ALERT_LIMIT_CLEAR;                 /* write high alert limit clear command */
+    data[0] = (clear >> 8) & 0xFF;                                        /* set data 0 */
+    data[1] = (clear >> 0) & 0xFF;                                        /* set data 1 */
+    data[2] = a_sht30_crc((uint8_t *)data, 2);                            /* set data crc */
+    res = a_sht30_write_bytes(handle, command, (uint8_t *)data, 3);       /* write data */
+    if (res != 0)                                                         /* check result */
+    {
+        handle->debug_print("sht30: write failed.\n");                    /* write failed */
+       
+        return 1;                                                         /* return error */
+    }
+    
+    return 0;                                                             /* success return 0 */
+}
+
+/**
+ * @brief      get high alert limit
+ * @param[in]  *handle pointer to an sht30 handle structure
+ * @param[out] *set pointer to a high alert limit set buffer
+ * @param[out] *clear pointer to a high alert limit clear buffer
+ * @return     status code
+ *             - 0 success
+ *             - 1 get high alert limit failed
+ *             - 2 handle is NULL
+ *             - 3 handle is not initialized
+ * @note       none
+ */
+uint8_t sht30_get_high_alert_limit(sht30_handle_t *handle, uint16_t *set, uint16_t *clear)
+{
+    uint8_t res;
+    uint16_t command;
+    uint8_t data[3];
+    
+    if (handle == NULL)                                             /* check handle */
+    {
+        return 2;                                                   /* return error */
+    }
+    if (handle->inited != 1)                                        /* check handle initialization */
+    {
+        return 3;                                                   /* return error */
+    }
+    
+    command = SHT30_COMMAND_READ_HIGH_ALERT_LIMIT_SET;              /* read high alert limit set command */
+    res = a_sht30_read(handle, command, (uint8_t *)data, 3);        /* read data */
+    if (res != 0)                                                   /* check result */
+    {
+        handle->debug_print("sht30: read data failed.\n");          /* read data failed */
+       
+        return 1;                                                   /* return error */
+    }
+    if (a_sht30_crc((uint8_t *)data, 2) != data[2])                 /* check crc */
+    {
+        handle->debug_print("sht30: crc check failed.\n");          /* crc check failed */
+       
+        return 1;                                                   /* return error */
+    }
+    *set = ((uint16_t)data[0] << 8) | data[1];                      /* set data */
+    
+    command = SHT30_COMMAND_READ_HIGH_ALERT_LIMIT_CLEAR;            /* read high alert limit clear command */
+    res = a_sht30_read(handle, command, (uint8_t *)data, 3);        /* read data */
+    if (res != 0)                                                   /* check result */
+    {
+        handle->debug_print("sht30: read data failed.\n");          /* read data failed */
+       
+        return 1;                                                   /* return error */
+    }
+    if (a_sht30_crc((uint8_t *)data, 2) != data[2])                 /* check crc */
+    {
+        handle->debug_print("sht30: crc check failed.\n");          /* crc check failed */
+       
+        return 1;                                                   /* return error */
+    }
+    *clear = ((uint16_t)data[0] << 8) | data[1];                    /* set data */
+    
+    return 0;                                                       /* success return 0 */
+}
+
+/**
+ * @brief     set low alert limit
+ * @param[in] *handle pointer to an sht30 handle structure
+ * @param[in] set low alert limit set
+ * @param[in] clear low alert limit clear
+ * @return    status code
+ *            - 0 success
+ *            - 1 set low alert limit failed
+ *            - 2 handle is NULL
+ *            - 3 handle is not initialized
+ * @note      none
+ */
+uint8_t sht30_set_low_alert_limit(sht30_handle_t *handle, uint16_t set, uint16_t clear)
+{
+    uint8_t res;
+    uint16_t command;
+    uint8_t data[3];
+    
+    if (handle == NULL)                                                   /* check handle */
+    {
+        return 2;                                                         /* return error */
+    }
+    if (handle->inited != 1)                                              /* check handle initialization */
+    {
+        return 3;                                                         /* return error */
+    }
+    
+    command = SHT30_COMMAND_WRITE_LOW_ALERT_LIMIT_SET;                    /* write low alert limit set command */
+    data[0] = (set >> 8) & 0xFF;                                          /* set data 0 */
+    data[1] = (set >> 0) & 0xFF;                                          /* set data 1 */
+    data[2] = a_sht30_crc((uint8_t *)data, 2);                            /* set data crc */
+    res = a_sht30_write_bytes(handle, command, (uint8_t *)data, 3);       /* write data */
+    if (res != 0)                                                         /* check result */
+    {
+        handle->debug_print("sht30: write failed.\n");                    /* write failed */
+       
+        return 1;                                                         /* return error */
+    }
+    handle->delay_ms(10);                                                 /* delay 10ms */
+    command = SHT30_COMMAND_WRITE_LOW_ALERT_LIMIT_CLEAR;                  /* write low alert limit clear command */
+    data[0] = (clear >> 8) & 0xFF;                                        /* set data 0 */
+    data[1] = (clear >> 0) & 0xFF;                                        /* set data 1 */
+    data[2] = a_sht30_crc((uint8_t *)data, 2);                            /* set data crc */
+    res = a_sht30_write_bytes(handle, command, (uint8_t *)data, 3);       /* write data */
+    if (res != 0)                                                         /* check result */
+    {
+        handle->debug_print("sht30: write failed.\n");                    /* write failed */
+       
+        return 1;                                                         /* return error */
+    }
+    
+    return 0;                                                             /* success return 0 */
+}
+
+/**
+ * @brief      get low alert limit
+ * @param[in]  *handle pointer to an sht30 handle structure
+ * @param[out] *set pointer to a low alert limit set buffer
+ * @param[out] *clear pointer to a low alert limit clear buffer
+ * @return     status code
+ *             - 0 success
+ *             - 1 get low alert limit failed
+ *             - 2 handle is NULL
+ *             - 3 handle is not initialized
+ * @note       none
+ */
+uint8_t sht30_get_low_alert_limit(sht30_handle_t *handle, uint16_t *set, uint16_t *clear)
+{
+    uint8_t res;
+    uint16_t command;
+    uint8_t data[3];
+    
+    if (handle == NULL)                                             /* check handle */
+    {
+        return 2;                                                   /* return error */
+    }
+    if (handle->inited != 1)                                        /* check handle initialization */
+    {
+        return 3;                                                   /* return error */
+    }
+    
+    command = SHT30_COMMAND_READ_LOW_ALERT_LIMIT_SET;               /* read low alert limit set command */
+    res = a_sht30_read(handle, command, (uint8_t *)data, 3);        /* read data */
+    if (res != 0)                                                   /* check result */
+    {
+        handle->debug_print("sht30: read data failed.\n");          /* read data failed */
+       
+        return 1;                                                   /* return error */
+    }
+    if (a_sht30_crc((uint8_t *)data, 2) != data[2])                 /* check crc */
+    {
+        handle->debug_print("sht30: crc check failed.\n");          /* crc check failed */
+       
+        return 1;                                                   /* return error */
+    }
+    *set = ((uint16_t)data[0] << 8) | data[1];                      /* set data */
+    
+    command = SHT30_COMMAND_READ_LOW_ALERT_LIMIT_CLEAR;             /* read low alert limit clear command */
+    res = a_sht30_read(handle, command, (uint8_t *)data, 3);        /* read data */
+    if (res != 0)                                                   /* check result */
+    {
+        handle->debug_print("sht30: read data failed.\n");          /* read data failed */
+       
+        return 1;                                                   /* return error */
+    }
+    if (a_sht30_crc((uint8_t *)data, 2) != data[2])                 /* check crc */
+    {
+        handle->debug_print("sht30: crc check failed.\n");          /* crc check failed */
+       
+        return 1;                                                   /* return error */
+    }
+    *clear = ((uint16_t)data[0] << 8) | data[1];                    /* set data */
+    
+    return 0;                                                       /* success return 0 */
+}
+
+/**
+ * @brief      alert limit convert to register raw data
+ * @param[in]  *handle pointer to an sht30 handle structure
+ * @param[in]  temperature converted temperature
+ * @param[in]  humidity converted humidity
+ * @param[out] *reg pointer to a register raw buffer
+ * @return     status code
+ *             - 0 success
+ *             - 2 handle is NULL
+ *             - 3 handle is not initialized
+ * @note       none
+ */
+uint8_t sht30_alert_limit_convert_to_register(sht30_handle_t *handle, float temperature, float humidity, uint16_t *reg)
+{
+    uint16_t r_t;
+    uint16_t r_h;
+    
+    if (handle == NULL)                                                   /* check handle */
+    {
+        return 2;                                                         /* return error */
+    }
+    if (handle->inited != 1)                                              /* check handle initialization */
+    {
+        return 3;                                                         /* return error */
+    }
+    
+    r_t = (uint16_t)(((temperature + 45.0f) / 175.0f) * 65535.0f);        /* convert to raw */
+    r_t = r_t >> 7;                                                       /* convert temperature */
+    r_h = (uint16_t)((humidity / 100.0f) * 65535.0f);                     /* convert to raw */
+    r_h = r_h >> 9;                                                       /* convert humidity */
+    *reg = (r_h << 9) | r_t;                                              /* set register */
+    
+    return 0;                                                             /* success return 0 */
+}
+
+/**
+ * @brief     irq handler
+ * @param[in] *handle pointer to an sht30 handle structure
+ * @return    status code
+ *            - 0 success
+ *            - 1 run failed
+ *            - 2 handle is NULL
+ *            - 3 handle is not initialized
+ * @note      none
+ */
+uint8_t sht30_irq_handler(sht30_handle_t *handle)
+{
+    uint8_t res;
+    uint8_t data[3];
+    uint16_t status;
+    uint16_t command;
+    
+    if (handle == NULL)                                                             /* check handle */
+    {
+        return 2;                                                                   /* return error */
+    }
+    if (handle->inited != 1)                                                        /* check handle initialization */
+    {
+        return 3;                                                                   /* return error */
+    }
+    
+    memset(data, 0, sizeof(uint8_t) * 3);                                           /* clear the buffer */
+    command = SHT30_COMMAND_READ_STATUS;                                            /* set command */
+    res = a_sht30_read(handle, command, (uint8_t *)data, 3);                        /* read status */
+    if (res != 0)                                                                   /* check result */
+    {
+        handle->debug_print("sht30: read status failed.\n");                        /* read status failed */
+       
+        return 1;                                                                   /* return error */
+    }
+    if (a_sht30_crc((uint8_t *)data, 2) == data[2])                                 /* check crc */
+    {
+        status = (uint16_t)((((uint16_t)data[0]) << 8) | data[1]);                  /* get status */
+        command = SHT30_COMMAND_CLEAR_STATUS;                                       /* set command */
+        res = a_sht30_write(handle, command);                                       /* write command */
+        if (res != 0)                                                               /* check result */
+        {
+            handle->debug_print("sht30: write command failed.\n");                  /* write command failed */
+               
+            return 1;                                                               /* return error */
+        }
+        
+        if ((status & SHT30_STATUS_ALERT_PENDING_STATUS) != 0)                      /* check alert pending status */
+        {
+            if (handle->receive_callback != NULL)                                   /* check the receive callback */
+            {
+                handle->receive_callback(SHT30_STATUS_ALERT_PENDING_STATUS);        /* run the callback */
+            }
+        }
+        if ((status & SHT30_STATUS_HUMIDITY_ALERT) != 0)                            /* check humidity alert */
+        {
+            if (handle->receive_callback != NULL)                                   /* check the receive callback */
+            {
+                handle->receive_callback(SHT30_STATUS_HUMIDITY_ALERT);              /* run the callback */
+            }
+        }
+        if ((status & SHT30_STATUS_TEMPERATURE_ALERT) != 0)                         /* check temperature alert */
+        {
+            if (handle->receive_callback != NULL)                                   /* check the receive callback */
+            {
+                handle->receive_callback(SHT30_STATUS_TEMPERATURE_ALERT);           /* run the callback */
+            }
+        }
+        
+        return 0;                                                                   /* success return 0 */
+    }
+    else
+    {
+        handle->debug_print("sht30: crc check failed.\n");                          /* crc check failed */
+       
+        return 1;                                                                   /* return error */
+    }
 }
 
 /**

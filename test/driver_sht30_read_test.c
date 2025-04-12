@@ -62,6 +62,7 @@ uint8_t sht30_read_test(sht30_address_t addr_pin, uint32_t times)
     DRIVER_SHT30_LINK_IIC_WRITE_ADDRESS16(&gs_handle, sht30_interface_iic_write_address16);
     DRIVER_SHT30_LINK_DELAY_MS(&gs_handle, sht30_interface_delay_ms);
     DRIVER_SHT30_LINK_DEBUG_PRINT(&gs_handle, sht30_interface_debug_print);
+    DRIVER_SHT30_LINK_RECEIVE_CALLBACK(&gs_handle, sht30_interface_receive_callback);
     
     /* sht30 info */
     res = sht30_info(&info);

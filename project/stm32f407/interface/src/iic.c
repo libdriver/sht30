@@ -395,7 +395,7 @@ uint8_t iic_write_address16(uint8_t addr, uint16_t reg, uint8_t *buf, uint16_t l
         
         return 1;
     }
-    
+
     /* write the data */
     for (i = 0; i < len; i++)
     {

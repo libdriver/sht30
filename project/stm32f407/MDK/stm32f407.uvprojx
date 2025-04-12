@@ -420,20 +420,30 @@
           <GroupName>test</GroupName>
           <Files>
             <File>
-              <FileName>driver_sht30_register_test.c</FileName>
+              <FileName>driver_sht30_alert_test.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\test\driver_sht30_register_test.c</FilePath>
+              <FilePath>..\..\..\test\driver_sht30_alert_test.c</FilePath>
             </File>
             <File>
               <FileName>driver_sht30_read_test.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\test\driver_sht30_read_test.c</FilePath>
             </File>
+            <File>
+              <FileName>driver_sht30_register_test.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\test\driver_sht30_register_test.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
           <GroupName>example</GroupName>
           <Files>
+            <File>
+              <FileName>driver_sht30_alert.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\example\driver_sht30_alert.c</FilePath>
+            </File>
             <File>
               <FileName>driver_sht30_basic.c</FileName>
               <FileType>1</FileType>
@@ -483,6 +493,11 @@
               <FileName>iic.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\interface\src\iic.c</FilePath>
+            </File>
+            <File>
+              <FileName>gpio.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\interface\src\gpio.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -964,7 +979,7 @@
   <LayerInfo>
     <Layers>
       <Layer>
-        <LayName>&lt;Project Info&gt;</LayName>
+        <LayName>stm32f407</LayName>
         <LayTarg>0</LayTarg>
         <LayPrjMark>1</LayPrjMark>
       </Layer>

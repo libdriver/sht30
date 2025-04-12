@@ -1,20 +1,20 @@
-## 2.0.5 (2025-03-15)
+## 2.0.5 (2025-04-12)
+
+## Features
+
+- add sn && alert functions
+
+## 2.0.4 (2025-03-15)
 
 ## Bug Fixes
 
 - fix doc errors
 
-## 2.0.4 (2025-01-05)
+## 2.0.3 (2025-01-05)
 
 ## Bug Fixes
 
 - fix getopt errors
-
-## 2.0.3 (2024-12-29)
-
-## Bug Fixes
-
-- fix doc errors
 
 ## 2.0.2 (2024-12-28)
 

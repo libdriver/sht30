@@ -120,6 +120,7 @@ typedef struct sht30_handle_s
     uint8_t (*iic_deinit)(void);                                                                   /**< point to an iic_deinit function address */
     uint8_t (*iic_write_address16)(uint8_t addr, uint16_t reg, uint8_t *buf, uint16_t len);        /**< point to an iic_write_address16 function address */
     uint8_t (*iic_read_address16)(uint8_t addr, uint16_t reg, uint8_t *buf, uint16_t len);         /**< point to an iic_read_address16 function address */
+    void (*receive_callback)(uint16_t type);                                                       /**< point to a receive_callback function address */
     void (*delay_ms)(uint32_t ms);                                                                 /**< point to a delay_ms function address */
     void (*debug_print)(const char *const fmt, ...);                                               /**< point to a debug_print function address */
     uint8_t iic_addr;                                                                              /**< iic device address */
@@ -211,6 +212,14 @@ typedef struct sht30_info_s
 #define DRIVER_SHT30_LINK_DEBUG_PRINT(HANDLE, FUC)           (HANDLE)->debug_print = FUC
 
 /**
+ * @brief     link receive_callback function
+ * @param[in] HANDLE pointer to an sht30 handle structure
+ * @param[in] FUC pointer to a receive_callback function address
+ * @note      none
+ */
+#define DRIVER_SHT30_LINK_RECEIVE_CALLBACK(HANDLE, FUC)      (HANDLE)->receive_callback = FUC
+
+/**
  * @}
  */
 
@@ -254,6 +263,18 @@ uint8_t sht30_set_addr_pin(sht30_handle_t *handle, sht30_address_t addr_pin);
  * @note        none
  */
 uint8_t sht30_get_addr_pin(sht30_handle_t *handle, sht30_address_t *addr_pin);
+
+/**
+ * @brief     irq handler
+ * @param[in] *handle pointer to an sht30 handle structure
+ * @return    status code
+ *            - 0 success
+ *            - 1 run failed
+ *            - 2 handle is NULL
+ *            - 3 handle is not initialized
+ * @note      none
+ */
+uint8_t sht30_irq_handler(sht30_handle_t *handle);
 
 /**
  * @brief     initialize the chip
@@ -346,11 +367,12 @@ uint8_t sht30_continuous_read(sht30_handle_t *handle,
  * @brief      get the current status
  * @param[in]  *handle pointer to an sht30 handle structure
  * @param[out] *status pointer to a status buffer
- * @return      status code
- *              - 0 success
- *              - 1 get status failed
- *              - 2 handle is NULL
- * @note        none
+ * @return     status code
+ *             - 0 success
+ *             - 1 get status failed
+ *             - 2 handle is NULL
+ *             - 3 handle is not initialized
+ * @note       none
  */
 uint8_t sht30_get_status(sht30_handle_t *handle, uint16_t *status);
 
@@ -361,6 +383,7 @@ uint8_t sht30_get_status(sht30_handle_t *handle, uint16_t *status);
  *            - 0 success
  *            - 1 clear status failed
  *            - 2 handle is NULL
+ *            - 3 handle is not initialized
  * @note      none
  */
 uint8_t sht30_clear_status(sht30_handle_t *handle);
@@ -425,6 +448,89 @@ uint8_t sht30_soft_reset(sht30_handle_t *handle);
  * @note      none
  */
 uint8_t sht30_set_heater(sht30_handle_t *handle, sht30_bool_t enable);
+
+/**
+ * @brief      get serial number
+ * @param[in]  *handle pointer to an sht30 handle structure
+ * @param[out] *sn pointer to a serial number buffer
+ * @return     status code
+ *             - 0 success
+ *             - 1 get serial number failed
+ *             - 2 handle is NULL
+ *             - 3 handle is not initialized
+ * @note       none
+ */
+uint8_t sht30_get_serial_number(sht30_handle_t *handle, uint8_t sn[4]);
+
+/**
+ * @brief     set high alert limit
+ * @param[in] *handle pointer to an sht30 handle structure
+ * @param[in] set high alert limit set
+ * @param[in] clear high alert limit clear
+ * @return    status code
+ *            - 0 success
+ *            - 1 set high alert limit failed
+ *            - 2 handle is NULL
+ *            - 3 handle is not initialized
+ * @note      none
+ */
+uint8_t sht30_set_high_alert_limit(sht30_handle_t *handle, uint16_t set, uint16_t clear);
+
+/**
+ * @brief      get high alert limit
+ * @param[in]  *handle pointer to an sht30 handle structure
+ * @param[out] *set pointer to a high alert limit set buffer
+ * @param[out] *clear pointer to a high alert limit clear buffer
+ * @return     status code
+ *             - 0 success
+ *             - 1 get high alert limit failed
+ *             - 2 handle is NULL
+ *             - 3 handle is not initialized
+ * @note       none
+ */
+uint8_t sht30_get_high_alert_limit(sht30_handle_t *handle, uint16_t *set, uint16_t *clear);
+
+/**
+ * @brief     set low alert limit
+ * @param[in] *handle pointer to an sht30 handle structure
+ * @param[in] set low alert limit set
+ * @param[in] clear low alert limit clear
+ * @return    status code
+ *            - 0 success
+ *            - 1 set low alert limit failed
+ *            - 2 handle is NULL
+ *            - 3 handle is not initialized
+ * @note      none
+ */
+uint8_t sht30_set_low_alert_limit(sht30_handle_t *handle, uint16_t set, uint16_t clear);
+
+/**
+ * @brief      get low alert limit
+ * @param[in]  *handle pointer to an sht30 handle structure
+ * @param[out] *set pointer to a low alert limit set buffer
+ * @param[out] *clear pointer to a low alert limit clear buffer
+ * @return     status code
+ *             - 0 success
+ *             - 1 get low alert limit failed
+ *             - 2 handle is NULL
+ *             - 3 handle is not initialized
+ * @note       none
+ */
+uint8_t sht30_get_low_alert_limit(sht30_handle_t *handle, uint16_t *set, uint16_t *clear);
+
+/**
+ * @brief      alert limit convert to register raw data
+ * @param[in]  *handle pointer to an sht30 handle structure
+ * @param[in]  temperature converted temperature
+ * @param[in]  humidity converted humidity
+ * @param[out] *reg pointer to a register raw buffer
+ * @return     status code
+ *             - 0 success
+ *             - 2 handle is NULL
+ *             - 3 handle is not initialized
+ * @note       none
+ */
+uint8_t sht30_alert_limit_convert_to_register(sht30_handle_t *handle, float temperature, float humidity, uint16_t *reg);
 
 /**
  * @}
