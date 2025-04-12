@@ -1433,6 +1433,9 @@
     <group>
         <name>example</name>
         <file>
+            <name>$PROJ_DIR$\..\..\..\example\driver_sht30_alert.c</name>
+        </file>
+        <file>
             <name>$PROJ_DIR$\..\..\..\example\driver_sht30_basic.c</name>
         </file>
         <file>
@@ -1721,6 +1724,9 @@
             <name>$PROJ_DIR$\..\interface\src\delay.c</name>
         </file>
         <file>
+            <name>$PROJ_DIR$\..\interface\src\gpio.c</name>
+        </file>
+        <file>
             <name>$PROJ_DIR$\..\interface\src\iic.c</name>
         </file>
         <file>
@@ -1735,6 +1741,9 @@
     </group>
     <group>
         <name>test</name>
+        <file>
+            <name>$PROJ_DIR$\..\..\..\test\driver_sht30_alert_test.c</name>
+        </file>
         <file>
             <name>$PROJ_DIR$\..\..\..\test\driver_sht30_read_test.c</name>
         </file>

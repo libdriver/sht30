@@ -8,5 +8,6 @@ var structsht30__handle__s =
     [ "iic_read_address16", "structsht30__handle__s.html#a73ec20f351f42f702ec4851b7fb5dea9", null ],
     [ "iic_write_address16", "structsht30__handle__s.html#ad0d1a9fdbed6b2a0099110444dee4bdf", null ],
     [ "inited", "structsht30__handle__s.html#a19bedf28d2b9748f6a62d9ae93f4e68f", null ],
+    [ "receive_callback", "structsht30__handle__s.html#a820f98c864ba6331d88f2106800551e7", null ],
     [ "repeatability", "structsht30__handle__s.html#a5073b24d736db31ec6cda640ef06af9d", null ]
 ];

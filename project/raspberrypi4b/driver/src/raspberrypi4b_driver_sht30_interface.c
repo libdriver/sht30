@@ -150,3 +150,33 @@ void sht30_interface_debug_print(const char *const fmt, ...)
     len = strlen((char *)str);
     (void)printf((uint8_t *)str, len);
 }
+
+/**
+ * @brief     interface receive callback
+ * @param[in] type receive type
+ * @note      none
+ */
+void sht30_interface_receive_callback(uint16_t type)
+{
+    switch (type)
+    {
+        case SHT30_STATUS_ALERT_PENDING_STATUS :
+        {
+            sht30_interface_debug_print("sht30: irq alert pending status.\n");
+            
+            break;
+        }
+        case SHT30_STATUS_HUMIDITY_ALERT :
+        {
+            sht30_interface_debug_print("sht30: irq humidity alert.\n");
+            
+            break;
+        }
+        case SHT30_STATUS_TEMPERATURE_ALERT :
+        {
+            sht30_interface_debug_print("sht30: irq temperature alert.\n");
+            
+            break;
+        }
+    }
+}

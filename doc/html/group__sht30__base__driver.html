@@ -169,6 +169,9 @@ Functions</h2></td></tr>
 <tr class="memitem:ga47f3778fb97126e8a2c8089bd6762e84"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__sht30__base__driver.html#ga47f3778fb97126e8a2c8089bd6762e84">sht30_get_addr_pin</a> (<a class="el" href="group__sht30__base__driver.html#gab89bcaf3a7349026010c65cd4aefe5e3">sht30_handle_t</a> *handle, <a class="el" href="group__sht30__base__driver.html#ga89b0b9a4c4bbf3d006b2a455db06123a">sht30_address_t</a> *addr_pin)</td></tr>
 <tr class="memdesc:ga47f3778fb97126e8a2c8089bd6762e84"><td class="mdescLeft">&#160;</td><td class="mdescRight">get the iic address pin  <a href="group__sht30__base__driver.html#ga47f3778fb97126e8a2c8089bd6762e84">More...</a><br /></td></tr>
 <tr class="separator:ga47f3778fb97126e8a2c8089bd6762e84"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa22868d4d6715711e3a0af5d6832578f"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__sht30__base__driver.html#gaa22868d4d6715711e3a0af5d6832578f">sht30_irq_handler</a> (<a class="el" href="group__sht30__base__driver.html#gab89bcaf3a7349026010c65cd4aefe5e3">sht30_handle_t</a> *handle)</td></tr>
+<tr class="memdesc:gaa22868d4d6715711e3a0af5d6832578f"><td class="mdescLeft">&#160;</td><td class="mdescRight">irq handler  <a href="group__sht30__base__driver.html#gaa22868d4d6715711e3a0af5d6832578f">More...</a><br /></td></tr>
+<tr class="separator:gaa22868d4d6715711e3a0af5d6832578f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga4e2bcd47163039567b8bbb67a36c3035"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__sht30__base__driver.html#ga4e2bcd47163039567b8bbb67a36c3035">sht30_init</a> (<a class="el" href="group__sht30__base__driver.html#gab89bcaf3a7349026010c65cd4aefe5e3">sht30_handle_t</a> *handle)</td></tr>
 <tr class="memdesc:ga4e2bcd47163039567b8bbb67a36c3035"><td class="mdescLeft">&#160;</td><td class="mdescRight">initialize the chip  <a href="group__sht30__base__driver.html#ga4e2bcd47163039567b8bbb67a36c3035">More...</a><br /></td></tr>
 <tr class="separator:ga4e2bcd47163039567b8bbb67a36c3035"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -208,6 +211,24 @@ Functions</h2></td></tr>
 <tr class="memitem:ga97ebef0db0c6054ed652a78820c5cc87"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__sht30__base__driver.html#ga97ebef0db0c6054ed652a78820c5cc87">sht30_set_heater</a> (<a class="el" href="group__sht30__base__driver.html#gab89bcaf3a7349026010c65cd4aefe5e3">sht30_handle_t</a> *handle, <a class="el" href="group__sht30__base__driver.html#ga655ab8c1ada5e03a96b97ea6344bfa74">sht30_bool_t</a> enable)</td></tr>
 <tr class="memdesc:ga97ebef0db0c6054ed652a78820c5cc87"><td class="mdescLeft">&#160;</td><td class="mdescRight">enable or disable the chip heater  <a href="group__sht30__base__driver.html#ga97ebef0db0c6054ed652a78820c5cc87">More...</a><br /></td></tr>
 <tr class="separator:ga97ebef0db0c6054ed652a78820c5cc87"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gadd74e9dc9ed427a02987603496a37abe"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__sht30__base__driver.html#gadd74e9dc9ed427a02987603496a37abe">sht30_get_serial_number</a> (<a class="el" href="group__sht30__base__driver.html#gab89bcaf3a7349026010c65cd4aefe5e3">sht30_handle_t</a> *handle, uint8_t sn[4])</td></tr>
+<tr class="memdesc:gadd74e9dc9ed427a02987603496a37abe"><td class="mdescLeft">&#160;</td><td class="mdescRight">get serial number  <a href="group__sht30__base__driver.html#gadd74e9dc9ed427a02987603496a37abe">More...</a><br /></td></tr>
+<tr class="separator:gadd74e9dc9ed427a02987603496a37abe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab669ee858721fdefb84cbd4ecbdb1091"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__sht30__base__driver.html#gab669ee858721fdefb84cbd4ecbdb1091">sht30_set_high_alert_limit</a> (<a class="el" href="group__sht30__base__driver.html#gab89bcaf3a7349026010c65cd4aefe5e3">sht30_handle_t</a> *handle, uint16_t set, uint16_t clear)</td></tr>
+<tr class="memdesc:gab669ee858721fdefb84cbd4ecbdb1091"><td class="mdescLeft">&#160;</td><td class="mdescRight">set high alert limit  <a href="group__sht30__base__driver.html#gab669ee858721fdefb84cbd4ecbdb1091">More...</a><br /></td></tr>
+<tr class="separator:gab669ee858721fdefb84cbd4ecbdb1091"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gabe3ff211f4e19ccf327dbc2b8781afc0"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__sht30__base__driver.html#gabe3ff211f4e19ccf327dbc2b8781afc0">sht30_get_high_alert_limit</a> (<a class="el" href="group__sht30__base__driver.html#gab89bcaf3a7349026010c65cd4aefe5e3">sht30_handle_t</a> *handle, uint16_t *set, uint16_t *clear)</td></tr>
+<tr class="memdesc:gabe3ff211f4e19ccf327dbc2b8781afc0"><td class="mdescLeft">&#160;</td><td class="mdescRight">get high alert limit  <a href="group__sht30__base__driver.html#gabe3ff211f4e19ccf327dbc2b8781afc0">More...</a><br /></td></tr>
+<tr class="separator:gabe3ff211f4e19ccf327dbc2b8781afc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gafe87069e3922f421ed2a160775765b0d"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__sht30__base__driver.html#gafe87069e3922f421ed2a160775765b0d">sht30_set_low_alert_limit</a> (<a class="el" href="group__sht30__base__driver.html#gab89bcaf3a7349026010c65cd4aefe5e3">sht30_handle_t</a> *handle, uint16_t set, uint16_t clear)</td></tr>
+<tr class="memdesc:gafe87069e3922f421ed2a160775765b0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">set low alert limit  <a href="group__sht30__base__driver.html#gafe87069e3922f421ed2a160775765b0d">More...</a><br /></td></tr>
+<tr class="separator:gafe87069e3922f421ed2a160775765b0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga64c78628258c6d5d2ee47ba10c67f3af"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__sht30__base__driver.html#ga64c78628258c6d5d2ee47ba10c67f3af">sht30_get_low_alert_limit</a> (<a class="el" href="group__sht30__base__driver.html#gab89bcaf3a7349026010c65cd4aefe5e3">sht30_handle_t</a> *handle, uint16_t *set, uint16_t *clear)</td></tr>
+<tr class="memdesc:ga64c78628258c6d5d2ee47ba10c67f3af"><td class="mdescLeft">&#160;</td><td class="mdescRight">get low alert limit  <a href="group__sht30__base__driver.html#ga64c78628258c6d5d2ee47ba10c67f3af">More...</a><br /></td></tr>
+<tr class="separator:ga64c78628258c6d5d2ee47ba10c67f3af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga973c93d583a2fefd14cfcaf5cc473c24"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__sht30__base__driver.html#ga973c93d583a2fefd14cfcaf5cc473c24">sht30_alert_limit_convert_to_register</a> (<a class="el" href="group__sht30__base__driver.html#gab89bcaf3a7349026010c65cd4aefe5e3">sht30_handle_t</a> *handle, float temperature, float humidity, uint16_t *reg)</td></tr>
+<tr class="memdesc:ga973c93d583a2fefd14cfcaf5cc473c24"><td class="mdescLeft">&#160;</td><td class="mdescRight">alert limit convert to register raw data  <a href="group__sht30__base__driver.html#ga973c93d583a2fefd14cfcaf5cc473c24">More...</a><br /></td></tr>
+<tr class="separator:ga973c93d583a2fefd14cfcaf5cc473c24"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p>sht30 base driver modules </p>
@@ -384,6 +405,66 @@ Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="ga973c93d583a2fefd14cfcaf5cc473c24"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga973c93d583a2fefd14cfcaf5cc473c24">&#9670;&nbsp;</a></span>sht30_alert_limit_convert_to_register()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t sht30_alert_limit_convert_to_register </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__sht30__base__driver.html#gab89bcaf3a7349026010c65cd4aefe5e3">sht30_handle_t</a> *&#160;</td>
+          <td class="paramname"><em>handle</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>temperature</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>humidity</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t *&#160;</td>
+          <td class="paramname"><em>reg</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>alert limit convert to register raw data </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>pointer to an sht30 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">temperature</td><td>converted temperature </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">humidity</td><td>converted humidity </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">*reg</td><td>pointer to a register raw buffer </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>status code<ul>
+<li>0 success</li>
+<li>2 handle is NULL</li>
+<li>3 handle is not initialized </li>
+</ul>
+</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>none </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="driver__sht30_8c_source.html#l01225">1225</a> of file <a class="el" href="driver__sht30_8c_source.html">driver_sht30.c</a>.</p>
+
+</div>
+</div>
 <a id="gaf5002b30bd448f5d7b9bbe042e130fac"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gaf5002b30bd448f5d7b9bbe042e130fac">&#9670;&nbsp;</a></span>sht30_clear_status()</h2>
 
@@ -410,12 +491,13 @@ Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>status code<ul>
 <li>0 success</li>
 <li>1 clear status failed</li>
-<li>2 handle is NULL </li>
+<li>2 handle is NULL</li>
+<li>3 handle is not initialized </li>
 </ul>
 </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>none </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="driver__sht30_8c_source.html#l00351">351</a> of file <a class="el" href="driver__sht30_8c_source.html">driver_sht30.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="driver__sht30_8c_source.html#l00385">385</a> of file <a class="el" href="driver__sht30_8c_source.html">driver_sht30.c</a>.</p>
 
 </div>
 </div>
@@ -483,7 +565,7 @@ Functions</h2></td></tr>
 </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>none </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="driver__sht30_8c_source.html#l00726">726</a> of file <a class="el" href="driver__sht30_8c_source.html">driver_sht30.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="driver__sht30_8c_source.html#l00760">760</a> of file <a class="el" href="driver__sht30_8c_source.html">driver_sht30.c</a>.</p>
 
 </div>
 </div>
@@ -519,7 +601,7 @@ Functions</h2></td></tr>
 </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>none </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="driver__sht30_8c_source.html#l00217">217</a> of file <a class="el" href="driver__sht30_8c_source.html">driver_sht30.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="driver__sht30_8c_source.html#l00249">249</a> of file <a class="el" href="driver__sht30_8c_source.html">driver_sht30.c</a>.</p>
 
 </div>
 </div>
@@ -565,7 +647,115 @@ Functions</h2></td></tr>
 </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>none </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="driver__sht30_8c_source.html#l00282">282</a> of file <a class="el" href="driver__sht30_8c_source.html">driver_sht30.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="driver__sht30_8c_source.html#l00314">314</a> of file <a class="el" href="driver__sht30_8c_source.html">driver_sht30.c</a>.</p>
+
+</div>
+</div>
+<a id="gabe3ff211f4e19ccf327dbc2b8781afc0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gabe3ff211f4e19ccf327dbc2b8781afc0">&#9670;&nbsp;</a></span>sht30_get_high_alert_limit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t sht30_get_high_alert_limit </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__sht30__base__driver.html#gab89bcaf3a7349026010c65cd4aefe5e3">sht30_handle_t</a> *&#160;</td>
+          <td class="paramname"><em>handle</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t *&#160;</td>
+          <td class="paramname"><em>set</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t *&#160;</td>
+          <td class="paramname"><em>clear</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>get high alert limit </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>pointer to an sht30 handle structure </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">*set</td><td>pointer to a high alert limit set buffer </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">*clear</td><td>pointer to a high alert limit clear buffer </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>status code<ul>
+<li>0 success</li>
+<li>1 get high alert limit failed</li>
+<li>2 handle is NULL</li>
+<li>3 handle is not initialized </li>
+</ul>
+</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>none </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="driver__sht30_8c_source.html#l01047">1047</a> of file <a class="el" href="driver__sht30_8c_source.html">driver_sht30.c</a>.</p>
+
+</div>
+</div>
+<a id="ga64c78628258c6d5d2ee47ba10c67f3af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga64c78628258c6d5d2ee47ba10c67f3af">&#9670;&nbsp;</a></span>sht30_get_low_alert_limit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t sht30_get_low_alert_limit </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__sht30__base__driver.html#gab89bcaf3a7349026010c65cd4aefe5e3">sht30_handle_t</a> *&#160;</td>
+          <td class="paramname"><em>handle</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t *&#160;</td>
+          <td class="paramname"><em>set</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t *&#160;</td>
+          <td class="paramname"><em>clear</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>get low alert limit </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>pointer to an sht30 handle structure </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">*set</td><td>pointer to a low alert limit set buffer </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">*clear</td><td>pointer to a low alert limit clear buffer </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>status code<ul>
+<li>0 success</li>
+<li>1 get low alert limit failed</li>
+<li>2 handle is NULL</li>
+<li>3 handle is not initialized </li>
+</ul>
+</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>none </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="driver__sht30_8c_source.html#l01163">1163</a> of file <a class="el" href="driver__sht30_8c_source.html">driver_sht30.c</a>.</p>
 
 </div>
 </div>
@@ -611,7 +801,54 @@ Functions</h2></td></tr>
 </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>none </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="driver__sht30_8c_source.html#l00413">413</a> of file <a class="el" href="driver__sht30_8c_source.html">driver_sht30.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="driver__sht30_8c_source.html#l00447">447</a> of file <a class="el" href="driver__sht30_8c_source.html">driver_sht30.c</a>.</p>
+
+</div>
+</div>
+<a id="gadd74e9dc9ed427a02987603496a37abe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gadd74e9dc9ed427a02987603496a37abe">&#9670;&nbsp;</a></span>sht30_get_serial_number()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t sht30_get_serial_number </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__sht30__base__driver.html#gab89bcaf3a7349026010c65cd4aefe5e3">sht30_handle_t</a> *&#160;</td>
+          <td class="paramname"><em>handle</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>sn</em>[4]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>get serial number </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>pointer to an sht30 handle structure </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">*sn</td><td>pointer to a serial number buffer </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>status code<ul>
+<li>0 success</li>
+<li>1 get serial number failed</li>
+<li>2 handle is NULL</li>
+<li>3 handle is not initialized </li>
+</ul>
+</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>none </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="driver__sht30_8c_source.html#l00938">938</a> of file <a class="el" href="driver__sht30_8c_source.html">driver_sht30.c</a>.</p>
 
 </div>
 </div>
@@ -652,12 +889,13 @@ Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>status code<ul>
 <li>0 success</li>
 <li>1 get status failed</li>
-<li>2 handle is NULL </li>
+<li>2 handle is NULL</li>
+<li>3 handle is not initialized </li>
 </ul>
 </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>none </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="driver__sht30_8c_source.html#l00304">304</a> of file <a class="el" href="driver__sht30_8c_source.html">driver_sht30.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="driver__sht30_8c_source.html#l00337">337</a> of file <a class="el" href="driver__sht30_8c_source.html">driver_sht30.c</a>.</p>
 
 </div>
 </div>
@@ -691,7 +929,7 @@ Functions</h2></td></tr>
 </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>none </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="driver__sht30_8c_source.html#l00953">953</a> of file <a class="el" href="driver__sht30_8c_source.html">driver_sht30.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="driver__sht30_8c_source.html#l01387">1387</a> of file <a class="el" href="driver__sht30_8c_source.html">driver_sht30.c</a>.</p>
 
 </div>
 </div>
@@ -727,7 +965,43 @@ Functions</h2></td></tr>
 </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>none </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="driver__sht30_8c_source.html#l00143">143</a> of file <a class="el" href="driver__sht30_8c_source.html">driver_sht30.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="driver__sht30_8c_source.html#l00175">175</a> of file <a class="el" href="driver__sht30_8c_source.html">driver_sht30.c</a>.</p>
+
+</div>
+</div>
+<a id="gaa22868d4d6715711e3a0af5d6832578f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaa22868d4d6715711e3a0af5d6832578f">&#9670;&nbsp;</a></span>sht30_irq_handler()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t sht30_irq_handler </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__sht30__base__driver.html#gab89bcaf3a7349026010c65cd4aefe5e3">sht30_handle_t</a> *&#160;</td>
+          <td class="paramname"><em>handle</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>irq handler </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>pointer to an sht30 handle structure </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>status code<ul>
+<li>0 success</li>
+<li>1 run failed</li>
+<li>2 handle is NULL</li>
+<li>3 handle is not initialized </li>
+</ul>
+</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>none </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="driver__sht30_8c_source.html#l01258">1258</a> of file <a class="el" href="driver__sht30_8c_source.html">driver_sht30.c</a>.</p>
 
 </div>
 </div>
@@ -773,7 +1047,7 @@ Functions</h2></td></tr>
 </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>none </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="driver__sht30_8c_source.html#l00260">260</a> of file <a class="el" href="driver__sht30_8c_source.html">driver_sht30.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="driver__sht30_8c_source.html#l00292">292</a> of file <a class="el" href="driver__sht30_8c_source.html">driver_sht30.c</a>.</p>
 
 </div>
 </div>
@@ -809,7 +1083,7 @@ Functions</h2></td></tr>
 </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>none </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="driver__sht30_8c_source.html#l00781">781</a> of file <a class="el" href="driver__sht30_8c_source.html">driver_sht30.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="driver__sht30_8c_source.html#l00815">815</a> of file <a class="el" href="driver__sht30_8c_source.html">driver_sht30.c</a>.</p>
 
 </div>
 </div>
@@ -856,7 +1130,115 @@ Functions</h2></td></tr>
 </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>none </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="driver__sht30_8c_source.html#l00854">854</a> of file <a class="el" href="driver__sht30_8c_source.html">driver_sht30.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="driver__sht30_8c_source.html#l00888">888</a> of file <a class="el" href="driver__sht30_8c_source.html">driver_sht30.c</a>.</p>
+
+</div>
+</div>
+<a id="gab669ee858721fdefb84cbd4ecbdb1091"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gab669ee858721fdefb84cbd4ecbdb1091">&#9670;&nbsp;</a></span>sht30_set_high_alert_limit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t sht30_set_high_alert_limit </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__sht30__base__driver.html#gab89bcaf3a7349026010c65cd4aefe5e3">sht30_handle_t</a> *&#160;</td>
+          <td class="paramname"><em>handle</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>set</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>clear</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>set high alert limit </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>pointer to an sht30 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">set</td><td>high alert limit set </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">clear</td><td>high alert limit clear </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>status code<ul>
+<li>0 success</li>
+<li>1 set high alert limit failed</li>
+<li>2 handle is NULL</li>
+<li>3 handle is not initialized </li>
+</ul>
+</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>none </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="driver__sht30_8c_source.html#l00993">993</a> of file <a class="el" href="driver__sht30_8c_source.html">driver_sht30.c</a>.</p>
+
+</div>
+</div>
+<a id="gafe87069e3922f421ed2a160775765b0d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gafe87069e3922f421ed2a160775765b0d">&#9670;&nbsp;</a></span>sht30_set_low_alert_limit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t sht30_set_low_alert_limit </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__sht30__base__driver.html#gab89bcaf3a7349026010c65cd4aefe5e3">sht30_handle_t</a> *&#160;</td>
+          <td class="paramname"><em>handle</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>set</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>clear</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>set low alert limit </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">*handle</td><td>pointer to an sht30 handle structure </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">set</td><td>low alert limit set </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">clear</td><td>low alert limit clear </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>status code<ul>
+<li>0 success</li>
+<li>1 set low alert limit failed</li>
+<li>2 handle is NULL</li>
+<li>3 handle is not initialized </li>
+</ul>
+</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>none </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="driver__sht30_8c_source.html#l01109">1109</a> of file <a class="el" href="driver__sht30_8c_source.html">driver_sht30.c</a>.</p>
 
 </div>
 </div>
@@ -902,7 +1284,7 @@ Functions</h2></td></tr>
 </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>none </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="driver__sht30_8c_source.html#l00387">387</a> of file <a class="el" href="driver__sht30_8c_source.html">driver_sht30.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="driver__sht30_8c_source.html#l00421">421</a> of file <a class="el" href="driver__sht30_8c_source.html">driver_sht30.c</a>.</p>
 
 </div>
 </div>
@@ -977,7 +1359,7 @@ Functions</h2></td></tr>
 </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>none </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="driver__sht30_8c_source.html#l00444">444</a> of file <a class="el" href="driver__sht30_8c_source.html">driver_sht30.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="driver__sht30_8c_source.html#l00478">478</a> of file <a class="el" href="driver__sht30_8c_source.html">driver_sht30.c</a>.</p>
 
 </div>
 </div>
@@ -1013,7 +1395,7 @@ Functions</h2></td></tr>
 </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>none </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="driver__sht30_8c_source.html#l00817">817</a> of file <a class="el" href="driver__sht30_8c_source.html">driver_sht30.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="driver__sht30_8c_source.html#l00851">851</a> of file <a class="el" href="driver__sht30_8c_source.html">driver_sht30.c</a>.</p>
 
 </div>
 </div>
@@ -1060,7 +1442,7 @@ Functions</h2></td></tr>
 </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>none </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="driver__sht30_8c_source.html#l00558">558</a> of file <a class="el" href="driver__sht30_8c_source.html">driver_sht30.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="driver__sht30_8c_source.html#l00592">592</a> of file <a class="el" href="driver__sht30_8c_source.html">driver_sht30.c</a>.</p>
 
 </div>
 </div>
@@ -1096,7 +1478,7 @@ Functions</h2></td></tr>
 </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>none </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="driver__sht30_8c_source.html#l00686">686</a> of file <a class="el" href="driver__sht30_8c_source.html">driver_sht30.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="driver__sht30_8c_source.html#l00720">720</a> of file <a class="el" href="driver__sht30_8c_source.html">driver_sht30.c</a>.</p>
 
 </div>
 </div>

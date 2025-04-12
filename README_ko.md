@@ -19,6 +19,7 @@ LibDriver SHT30은 LibDriver에서 출시한 SHT30의 전체 기능 드라이버
   - [사용](#사용)
     - [example basic](#example-basic)
     - [example shot](#example-shot)
+    - [example alert](#example-alert)
   - [문서](#문서)
   - [기고](#기고)
   - [저작권](#저작권)
@@ -59,6 +60,7 @@ LibDriver SHT30은 LibDriver에서 출시한 SHT30의 전체 기능 드라이버
 
 uint8_t res;
 uint8_t i;
+uint8_t sn[4];
 float temperature;
 float humidity;
 
@@ -70,6 +72,17 @@ if (res != 0)
 
 ...
 
+res = sht30_basic_get_serial_number(sn);
+if (res != 0)
+{
+    sht30_basic_deinit();
+
+    return 1;
+}
+sht30_interface_debug_print("sht30: serial number is 0x%02X 0x%02X 0x%02X 0x%02X.\n", sn[0], sn[1], sn[2], sn[3]);
+
+...
+    
 for (i = 0; i < 3; i++)
 {
     sht30_interface_delay_ms(1000);
@@ -96,11 +109,12 @@ return 0;
 
 #### example shot
 
-```c
+```C
 #include "driver_sht30_shot.h"
 
 uint8_t res;
 uint8_t i;
+uint8_t sn[4];
 float temperature;
 float humidity;
 
@@ -111,7 +125,18 @@ if (res != 0)
 }
 
 ...
+    
+res = sht30_shot_get_serial_number(sn);
+if (res != 0)
+{
+    sht30_shot_deinit();
 
+    return 1;
+}
+sht30_interface_debug_print("sht30: serial number is 0x%02X 0x%02X 0x%02X 0x%02X.\n", sn[0], sn[1], sn[2], sn[3]);
+
+...
+    
 for (i = 0; i < 3; i++)
 {
     sht30_interface_delay_ms(1000);
@@ -132,6 +157,97 @@ for (i = 0; i < 3; i++)
 ...
 
 (void)sht30_shot_deinit();
+
+return 0;
+```
+
+#### example alert
+
+```C
+#include "driver_sht30_alert.h"
+
+uint8_t res;
+uint32_t i;
+uint8_t sn[4];
+float high_limit_temperature = 30.0f;
+float high_limit_humidity = 50.0f;
+float low_limit_temperature = 25.0f;
+float low_limit_humidity = 30.0f;
+
+static void a_receive_callback(uint16_t type)
+{
+    switch (type)
+    {
+        case SHT30_STATUS_ALERT_PENDING_STATUS :
+        {
+            sht30_interface_debug_print("sht30: irq alert pending status.\n");
+            
+            break;
+        }
+        case SHT30_STATUS_HUMIDITY_ALERT :
+        {
+            sht30_interface_debug_print("sht30: irq humidity alert.\n");
+            
+            break;
+        }
+        case SHT30_STATUS_TEMPERATURE_ALERT :
+        {
+            sht30_interface_debug_print("sht30: irq temperature alert.\n");
+            
+            break;
+        }
+    }
+}
+
+g_gpio_irq = sht30_alert_irq_handler;
+res = gpio_interrupt_init();
+if (res != 0)
+{
+    g_gpio_irq = NULL;
+
+    return 1;
+}
+
+...
+
+res = sht30_alert_init(addr, a_receive_callback,
+                       high_limit_temperature, high_limit_humidity,
+                       high_limit_temperature - 1.0f, high_limit_humidity + 1.0f,
+                       low_limit_temperature, low_limit_humidity,
+                       low_limit_temperature - 1.0f, low_limit_humidity + 1.0f);
+if (res != 0)
+{
+    gpio_interrupt_deinit();
+    g_gpio_irq = NULL;
+
+    return 1;
+}
+
+...
+    
+res = sht30_alert_get_serial_number(sn);
+if (res != 0)
+{
+    sht30_alert_deinit();
+
+    return 1;
+}
+sht30_interface_debug_print("sht30: serial number is 0x%02X 0x%02X 0x%02X 0x%02X.\n", sn[0], sn[1], sn[2], sn[3]);
+
+...
+    
+/* loop */
+for (i = 0; i < 10000; i++)
+{
+    /* delay 1ms */
+    sht30_interface_delay_ms(1);
+}
+
+...
+    
+gpio_interrupt_deinit();
+g_gpio_irq = NULL;
+(void)sht30_alert_deinit();
 
 return 0;
 ```

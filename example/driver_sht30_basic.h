@@ -89,6 +89,16 @@ uint8_t sht30_basic_read(float *temperature, float *humidity);
 uint8_t sht30_basic_deinit(void);
 
 /**
+ * @brief      basic example get serial number
+ * @param[out] *sn pointer to a serial number buffer
+ * @return     status code
+ *             - 0 success
+ *             - 1 get failed
+ * @note       none
+ */
+uint8_t sht30_basic_get_serial_number(uint8_t sn[4]);
+
+/**
  * @}
  */
 

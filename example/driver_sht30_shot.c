@@ -59,6 +59,7 @@ uint8_t sht30_shot_init(sht30_address_t addr_pin)
     DRIVER_SHT30_LINK_IIC_WRITE_ADDRESS16(&gs_handle, sht30_interface_iic_write_address16);
     DRIVER_SHT30_LINK_DELAY_MS(&gs_handle, sht30_interface_delay_ms);
     DRIVER_SHT30_LINK_DEBUG_PRINT(&gs_handle, sht30_interface_debug_print);
+    DRIVER_SHT30_LINK_RECEIVE_CALLBACK(&gs_handle, sht30_interface_receive_callback);
 
     /* set addr pin */
     res = sht30_set_addr_pin(&gs_handle, addr_pin);
@@ -137,10 +138,8 @@ uint8_t sht30_shot_read(float *temperature, float *humidity)
     {
         return 1;
     }
-    else
-    {
-        return 0;
-    }
+    
+    return 0;
 }
 
 /**
@@ -157,8 +156,25 @@ uint8_t sht30_shot_deinit(void)
     {
         return 1;
     }
-    else
+    
+    return 0;
+}
+
+/**
+ * @brief      shot example get serial number
+ * @param[out] *sn pointer to a serial number buffer
+ * @return     status code
+ *             - 0 success
+ *             - 1 get failed
+ * @note       none
+ */
+uint8_t sht30_shot_get_serial_number(uint8_t sn[4])
+{
+    /* get serial number */
+    if (sht30_get_serial_number(&gs_handle, sn) != 0)
     {
-        return 0;
+        return 1;
     }
+    
+    return 0;
 }

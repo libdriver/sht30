@@ -1,15 +1,25 @@
 var group__sht30__example__driver =
 [
+    [ "SHT30_ALERT_DEFAULT_HEATER", "group__sht30__example__driver.html#gaaa905ec48631d57db5f2a5bdf2110596", null ],
+    [ "SHT30_ALERT_DEFAULT_RATE", "group__sht30__example__driver.html#ga1c141d1044bfcf4a194cf6b0fed6196b", null ],
+    [ "SHT30_ALERT_DEFAULT_REPEATABILITY", "group__sht30__example__driver.html#ga27d053e031d961937fc5c5ab974c4ca9", null ],
     [ "SHT30_BASIC_DEFAULT_HEATER", "group__sht30__example__driver.html#gacfd9b068686646786fa442cac004aaf2", null ],
     [ "SHT30_BASIC_DEFAULT_RATE", "group__sht30__example__driver.html#ga615e3dcab87225b74b40648917a66a3b", null ],
     [ "SHT30_BASIC_DEFAULT_REPEATABILITY", "group__sht30__example__driver.html#gab9a431252719cee07c98c5c49e0c2daf", null ],
     [ "SHT30_SHOT_DEFAULT_CLOCK_STRETCHING", "group__sht30__example__driver.html#gae60bf747fbb7ab15e91089cd1eac8e7c", null ],
     [ "SHT30_SHOT_DEFAULT_HEATER", "group__sht30__example__driver.html#gafbb9afc9fac5abcf652d448a94c39247", null ],
     [ "SHT30_SHOT_DEFAULT_REPEATABILITY", "group__sht30__example__driver.html#gaa525857c502c949eab49849a271d466f", null ],
+    [ "sht30_alert_deinit", "group__sht30__example__driver.html#ga904a16c3e66c4f79a26b2a7f7c304425", null ],
+    [ "sht30_alert_get_serial_number", "group__sht30__example__driver.html#ga81ef8f590dcebfbe9445a78d8318400c", null ],
+    [ "sht30_alert_init", "group__sht30__example__driver.html#gae584f7720d3cb1d8e643421be7472210", null ],
+    [ "sht30_alert_irq_handler", "group__sht30__example__driver.html#ga47926ad45bcbb9cfc11dd1e0a03caba9", null ],
+    [ "sht30_alert_read", "group__sht30__example__driver.html#ga7c37783e477a815d438a693d18828ea8", null ],
     [ "sht30_basic_deinit", "group__sht30__example__driver.html#ga83e96f3ee7b9dfb137654c2043b58500", null ],
+    [ "sht30_basic_get_serial_number", "group__sht30__example__driver.html#gabf1c3ed7c27b2d6f13215a570fc02321", null ],
     [ "sht30_basic_init", "group__sht30__example__driver.html#ga20e0f9bc591206aeeaf83926a2259c2d", null ],
     [ "sht30_basic_read", "group__sht30__example__driver.html#ga033514df9fd6eb0f3a342935fd349de2", null ],
     [ "sht30_shot_deinit", "group__sht30__example__driver.html#ga2f01fd1f535458e3b25c564e2522ef77", null ],
+    [ "sht30_shot_get_serial_number", "group__sht30__example__driver.html#ga6299d3f86c5d4bfad5d24baddcb9087e", null ],
     [ "sht30_shot_init", "group__sht30__example__driver.html#ga8f00c4527efe881d5744ca3590cf1427", null ],
     [ "sht30_shot_read", "group__sht30__example__driver.html#gac6d3857aa13bfaf2fce12296dee7625a", null ]
 ];

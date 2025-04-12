@@ -36,11 +36,14 @@
 
 #include "driver_sht30_register_test.h"
 #include "driver_sht30_read_test.h"
+#include "driver_sht30_alert_test.h"
 #include "driver_sht30_basic.h"
 #include "driver_sht30_shot.h"
+#include "driver_sht30_alert.h"
 #include "shell.h"
 #include "clock.h"
 #include "delay.h"
+#include "gpio.h"
 #include "uart.h"
 #include "getopt.h"
 #include <stdlib.h>
@@ -50,6 +53,62 @@
  */
 uint8_t g_buf[256];        /**< uart buffer */
 volatile uint16_t g_len;   /**< uart buffer length */
+uint8_t (*g_gpio_irq)(void) = NULL;        /**< gpio irq */
+
+/**
+ * @brief exti 0 irq
+ * @note  none
+ */
+void EXTI0_IRQHandler(void)
+{
+    HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_0);
+}
+
+/**
+ * @brief     gpio exti callback
+ * @param[in] pin gpio pin
+ * @note      none
+ */
+void HAL_GPIO_EXTI_Callback(uint16_t pin)
+{
+    if (pin == GPIO_PIN_0)
+    {
+        if (g_gpio_irq != NULL)
+        {
+            g_gpio_irq();
+        }
+    }
+}
+
+/**
+ * @brief     interface receive callback
+ * @param[in] type receive type
+ * @note      none
+ */
+static void a_receive_callback(uint16_t type)
+{
+    switch (type)
+    {
+        case SHT30_STATUS_ALERT_PENDING_STATUS :
+        {
+            sht30_interface_debug_print("sht30: irq alert pending status.\n");
+            
+            break;
+        }
+        case SHT30_STATUS_HUMIDITY_ALERT :
+        {
+            sht30_interface_debug_print("sht30: irq humidity alert.\n");
+            
+            break;
+        }
+        case SHT30_STATUS_TEMPERATURE_ALERT :
+        {
+            sht30_interface_debug_print("sht30: irq temperature alert.\n");
+            
+            break;
+        }
+    }
+}
 
 /**
  * @brief     sht30 full function
@@ -75,10 +134,20 @@ uint8_t sht30(uint8_t argc, char **argv)
         {"test", required_argument, NULL, 't'},
         {"addr", required_argument, NULL, 1},
         {"times", required_argument, NULL, 2},
+        {"timeout", required_argument, NULL, 3},
+        {"high-limit-temp", required_argument, NULL, 4},
+        {"high-limit-humi", required_argument, NULL, 5},
+        {"low-limit-temp", required_argument, NULL, 6},
+        {"low-limit-humi", required_argument, NULL, 7},
         {NULL, 0, NULL, 0},
     };
     char type[33] = "unknown";
     uint32_t times = 3;
+    uint32_t timeout = 10000;
+    float high_limit_temperature = 30.0f;
+    float high_limit_humidity = 50.0f;
+    float low_limit_temperature = 25.0f;
+    float low_limit_humidity = 30.0f;
     sht30_address_t addr = SHT30_ADDRESS_0;
     
     /* if no params */
@@ -179,6 +248,51 @@ uint8_t sht30(uint8_t argc, char **argv)
                 break;
             } 
             
+            /* timeout */
+            case 3 :
+            {
+                /* set the timeout */
+                timeout = atol(optarg);
+                
+                break;
+            } 
+            
+            /* high_limit_temperature */
+            case 4 :
+            {
+                /* set the high limit temperature */
+                high_limit_temperature = (float)atof(optarg);
+                
+                break;
+            } 
+            
+            /* high_limit_humidity */
+            case 5 :
+            {
+                /* set the high limit humidity */
+                high_limit_humidity = (float)atof(optarg);
+                
+                break;
+            } 
+            
+            /* low_limit_temperature */
+            case 6 :
+            {
+                /* set the low limit temperature */
+                low_limit_temperature = (float)atof(optarg);
+                
+                break;
+            } 
+            
+            /* low_limit_humidity */
+            case 7 :
+            {
+                /* set the low limit humidity */
+                low_limit_humidity = (float)atof(optarg);
+                
+                break;
+            } 
+            
             /* the end */
             case -1 :
             {
@@ -201,10 +315,8 @@ uint8_t sht30(uint8_t argc, char **argv)
         {
             return 1;
         }
-        else
-        {
-            return 0;
-        }
+        
+        return 0;
     }
     else if (strcmp("t_read", type) == 0)
     {
@@ -213,10 +325,64 @@ uint8_t sht30(uint8_t argc, char **argv)
         {
             return 1;
         }
-        else
+        
+        return 0;
+    }
+    else if (strcmp("t_alert", type) == 0)
+    {
+        uint8_t res;
+        
+        /* gpio init */
+        g_gpio_irq = sht30_alert_test_irq_handler;
+        res = gpio_interrupt_init();
+        if (res != 0)
         {
-            return 0;
+            g_gpio_irq = NULL;
+            
+            return 1;
         }
+        
+        /* run alert test */
+        if (sht30_alert_test(addr, high_limit_temperature, high_limit_humidity,
+                             low_limit_temperature, low_limit_humidity, timeout) != 0)
+        {
+            gpio_interrupt_deinit();
+            g_gpio_irq = NULL;
+            
+            return 1;
+        }
+        
+        gpio_interrupt_deinit();
+        g_gpio_irq = NULL;
+        
+        return 0;
+    }
+    else if (strcmp("e_sn", type) == 0)
+    {
+        uint8_t res;
+        uint8_t sn[4];
+        
+        /* basic init */
+        res = sht30_basic_init(addr);
+        if (res != 0)
+        {
+            return 1;
+        }
+        
+        /* get serial number */
+        res = sht30_basic_get_serial_number(sn);
+        if (res != 0)
+        {
+            sht30_basic_deinit();
+            
+            return 1;
+        }
+        sht30_interface_debug_print("sht30: serial number is 0x%02X 0x%02X 0x%02X 0x%02X.\n", sn[0], sn[1], sn[2], sn[3]);
+        
+        /* basic deinit */
+        (void)sht30_basic_deinit();
+        
+        return 0;
     }
     else if (strcmp("e_read", type) == 0)
     {
@@ -298,6 +464,59 @@ uint8_t sht30(uint8_t argc, char **argv)
         
         return 0;
     }
+    else if (strcmp("e_alert", type) == 0)
+    {
+        uint8_t res;
+        uint32_t i;
+        
+        /* gpio init */
+        g_gpio_irq = sht30_alert_irq_handler;
+        res = gpio_interrupt_init();
+        if (res != 0)
+        {
+            g_gpio_irq = NULL;
+            
+            return 1;
+        }
+        
+        /* output */
+        sht30_interface_debug_print("sht30: high limit temperature is %.02fC.\n", high_limit_temperature);
+        sht30_interface_debug_print("sht30: high limit humidity is %.02f%%.\n", high_limit_humidity);
+        sht30_interface_debug_print("sht30: low limit temperature is %.02fC.\n", low_limit_temperature);
+        sht30_interface_debug_print("sht30: low limit humidity is %.02f%%.\n", low_limit_humidity);
+        
+        /* alert init */
+        res = sht30_alert_init(addr, a_receive_callback,
+                               high_limit_temperature, high_limit_humidity,
+                               high_limit_temperature - 1.0f, high_limit_humidity + 1.0f,
+                               low_limit_temperature, low_limit_humidity,
+                               low_limit_temperature - 1.0f, low_limit_humidity + 1.0f);
+        if (res != 0)
+        {
+            gpio_interrupt_deinit();
+            g_gpio_irq = NULL;
+            
+            return 1;
+        }
+        
+        /* loop */
+        for (i = 0; i < timeout; i++)
+        {
+            /* delay 1ms */
+            sht30_interface_delay_ms(1);
+        }
+        
+        gpio_interrupt_deinit();
+        g_gpio_irq = NULL;
+        
+        /* finish */
+        sht30_interface_debug_print("sht30: finish.\n");
+        
+        /* alert deinit */
+        (void)sht30_alert_deinit();
+        
+        return 0;
+    }
     else if (strcmp("h", type) == 0)
     {
         help:
@@ -307,19 +526,28 @@ uint8_t sht30(uint8_t argc, char **argv)
         sht30_interface_debug_print("  sht30 (-p | --port)\n");
         sht30_interface_debug_print("  sht30 (-t reg | --test=reg) [--addr=<0 | 1>]\n");
         sht30_interface_debug_print("  sht30 (-t read | --test=read) [--addr=<0 | 1>] [--times=<num>]\n");
+        sht30_interface_debug_print("  sht30 (-t alert | --test=alert) [--addr=<0 | 1>] [--timeout=<ms>] [--high-limit-temp=<degree>] [--high-limit-humi=<percentage>]\n");
+        sht30_interface_debug_print("        [--low-limit-temp=<degree>] [--low-limit-humi=<percentage>]\n");
         sht30_interface_debug_print("  sht30 (-e read | --example=read) [--addr=<0 | 1>] [--times=<num>]\n");
         sht30_interface_debug_print("  sht30 (-e shot | --example=shot) [--addr=<0 | 1>] [--times=<num>]\n");
+        sht30_interface_debug_print("  sht30 (-e alert | --example=alert) [--addr=<0 | 1>] [--timeout=<ms>] [--high-limit-temp=<degree>] [--high-limit-humi=<percentage>]\n");
+        sht30_interface_debug_print("        [--low-limit-temp=<degree>] [--low-limit-humi=<percentage>]\n");
         sht30_interface_debug_print("\n");
         sht30_interface_debug_print("Options:\n");
         sht30_interface_debug_print("      --addr=<0 | 1>    Set the addr pin.([default: 0])\n");
-        sht30_interface_debug_print("  -e <read | shot>, --example=<read | shot>\n");
+        sht30_interface_debug_print("  -e <read | shot | alert | sn>, --example=<read | shot | alert | sn>\n");
         sht30_interface_debug_print("                        Run the driver example.\n");
+        sht30_interface_debug_print("      --low-limit-temp  Low limit temperature in degress.([default: 25.0])\n");
+        sht30_interface_debug_print("      --low-limit-humi  Low limit humidity in percentage.([default: 30.0])\n");
         sht30_interface_debug_print("  -h, --help            Show the help.\n");
+        sht30_interface_debug_print("      --high-limit-temp High limit temperature in degress.([default: 30.0])\n");
+        sht30_interface_debug_print("      --high-limit-humi High limit humidity in percentage.([default: 50.0])\n");
         sht30_interface_debug_print("  -i, --information     Show the chip information.\n");
         sht30_interface_debug_print("  -p, --port            Display the pin connections of the current board.\n");
-        sht30_interface_debug_print("  -t <reg | read>, --test=<reg | read>\n");
+        sht30_interface_debug_print("  -t <reg | read | alert>, --test=<reg | read | alert>\n");
         sht30_interface_debug_print("                        Run the driver test.\n");
         sht30_interface_debug_print("      --times=<num>     Set the running times.([default: 3])\n");
+        sht30_interface_debug_print("      --timeout=<ms>    Set timeout in ms.([default: 10000])\n");
 
         return 0;
     }
@@ -346,6 +574,7 @@ uint8_t sht30(uint8_t argc, char **argv)
         /* print pin connection */
         sht30_interface_debug_print("sht30: SCL connected to GPIOB PIN8.\n");
         sht30_interface_debug_print("sht30: SDA connected to GPIOB PIN9.\n");
+        sht30_interface_debug_print("sht30: ALERT connected to GPIOB PIN0.\n");
         
         return 0;
     }

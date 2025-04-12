@@ -123,6 +123,13 @@ void sht30_interface_delay_ms(uint32_t ms);
 void sht30_interface_debug_print(const char *const fmt, ...);
 
 /**
+ * @brief     interface receive callback
+ * @param[in] type receive type
+ * @note      none
+ */
+void sht30_interface_receive_callback(uint16_t type);
+
+/**
  * @}
  */
 
