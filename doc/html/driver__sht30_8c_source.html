@@ -485,7 +485,7 @@ $(document).ready(function(){initNavTree('driver__sht30_8c_source.html',''); ini
 <div class="line"><a name="l00573"></a><span class="lineno">  573</span>&#160;    *temperature_raw = (uint16_t)((((uint16_t)data[0]) &lt;&lt; 8) | data[1]);           <span class="comment">/* get raw temperature */</span></div>
 <div class="line"><a name="l00574"></a><span class="lineno">  574</span>&#160;    *humidity_raw = (uint16_t)((((uint16_t)data[3]) &lt;&lt; 8) | data[4]);              <span class="comment">/* get raw humidity */</span></div>
 <div class="line"><a name="l00575"></a><span class="lineno">  575</span>&#160;    *temperature_s = (float)(*temperature_raw) / 65535.0f * 175.0f - 45.0f;        <span class="comment">/* convert raw temperature */</span></div>
-<div class="line"><a name="l00576"></a><span class="lineno">  576</span>&#160;    *humidity_s = (float)(*humidity_raw) / 65535.0f *100.0f;                       <span class="comment">/* convert raw humidity */</span></div>
+<div class="line"><a name="l00576"></a><span class="lineno">  576</span>&#160;    *humidity_s = (float)(*humidity_raw) / 65535.0f * 100.0f;                      <span class="comment">/* convert raw humidity */</span></div>
 <div class="line"><a name="l00577"></a><span class="lineno">  577</span>&#160;    </div>
 <div class="line"><a name="l00578"></a><span class="lineno">  578</span>&#160;    <span class="keywordflow">return</span> 0;                                                                      <span class="comment">/* success return 0 */</span></div>
 <div class="line"><a name="l00579"></a><span class="lineno">  579</span>&#160;}</div>
@@ -674,7 +674,7 @@ $(document).ready(function(){initNavTree('driver__sht30_8c_source.html',''); ini
 <div class="line"><a name="l00797"></a><span class="lineno">  797</span>&#160;    *temperature_raw = (uint16_t)((((uint16_t)data[0]) &lt;&lt; 8) | data[1]);           <span class="comment">/* get raw temperature */</span></div>
 <div class="line"><a name="l00798"></a><span class="lineno">  798</span>&#160;    *humidity_raw = (uint16_t)((((uint16_t)data[3]) &lt;&lt; 8) | data[4]);              <span class="comment">/* get raw humidity */</span></div>
 <div class="line"><a name="l00799"></a><span class="lineno">  799</span>&#160;    *temperature_s = (float)(*temperature_raw) / 65535.0f * 175.0f - 45.0f;        <span class="comment">/* convert raw temperature */</span></div>
-<div class="line"><a name="l00800"></a><span class="lineno">  800</span>&#160;    *humidity_s = (float)(*humidity_raw) / 65535.0f *100.0f;                       <span class="comment">/* convert raw humidity */</span></div>
+<div class="line"><a name="l00800"></a><span class="lineno">  800</span>&#160;    *humidity_s = (float)(*humidity_raw) / 65535.0f * 100.0f;                      <span class="comment">/* convert raw humidity */</span></div>
 <div class="line"><a name="l00801"></a><span class="lineno">  801</span>&#160;    </div>
 <div class="line"><a name="l00802"></a><span class="lineno">  802</span>&#160;    <span class="keywordflow">return</span> 0;                                                                      <span class="comment">/* success return 0 */</span></div>
 <div class="line"><a name="l00803"></a><span class="lineno">  803</span>&#160;}</div>
