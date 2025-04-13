@@ -573,7 +573,7 @@ uint8_t sht30_single_read(sht30_handle_t *handle, sht30_bool_t clock_stretching_
     *temperature_raw = (uint16_t)((((uint16_t)data[0]) << 8) | data[1]);           /* get raw temperature */
     *humidity_raw = (uint16_t)((((uint16_t)data[3]) << 8) | data[4]);              /* get raw humidity */
     *temperature_s = (float)(*temperature_raw) / 65535.0f * 175.0f - 45.0f;        /* convert raw temperature */
-    *humidity_s = (float)(*humidity_raw) / 65535.0f *100.0f;                       /* convert raw humidity */
+    *humidity_s = (float)(*humidity_raw) / 65535.0f * 100.0f;                      /* convert raw humidity */
     
     return 0;                                                                      /* success return 0 */
 }
@@ -797,7 +797,7 @@ uint8_t sht30_continuous_read(sht30_handle_t *handle,
     *temperature_raw = (uint16_t)((((uint16_t)data[0]) << 8) | data[1]);           /* get raw temperature */
     *humidity_raw = (uint16_t)((((uint16_t)data[3]) << 8) | data[4]);              /* get raw humidity */
     *temperature_s = (float)(*temperature_raw) / 65535.0f * 175.0f - 45.0f;        /* convert raw temperature */
-    *humidity_s = (float)(*humidity_raw) / 65535.0f *100.0f;                       /* convert raw humidity */
+    *humidity_s = (float)(*humidity_raw) / 65535.0f * 100.0f;                      /* convert raw humidity */
     
     return 0;                                                                      /* success return 0 */
 }
