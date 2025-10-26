@@ -109,8 +109,8 @@ static uint8_t a_sht30_write_bytes(sht30_handle_t *handle, uint16_t reg, uint8_t
         return 1;                                                                  /* return error */
     }
     else
-    {                                                                              /* success return 0 */
-        return 0;
+    {
+        return 0;                                                                  /* success return 0 */
     }
 }
 
@@ -132,8 +132,8 @@ static uint8_t a_sht30_read(sht30_handle_t *handle, uint16_t reg, uint8_t *data,
         return 1;                                                                 /* return error */
     }
     else
-    {                                                                             /* success return 0 */
-        return 0;
+    {
+        return 0;                                                                 /* success return 0 */
     }
 }
 
